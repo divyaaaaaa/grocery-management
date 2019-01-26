@@ -1,3 +1,6 @@
+import datetime
+
+
 def view_stock_availability(stock):
     print("Item Code \t Item name \t Quantity \t Price")
     for key, value in stock.iteritems():
@@ -8,5 +11,5 @@ def view_bill(bill):
     print("Final Bill:", bill)
 
 
-def view_total_sales(total_sales_obj):
-    print(total_sales_obj)
+def view_total_sales(total_sales_amount):
+    print("Total sal for", datetime.datetime.now(), "::", total_sales_amount)
