@@ -1,8 +1,9 @@
 class Item:
-    def __init__(self, name, price, quantity):
+    def __init__(self, name, price, quantity, category):
         self.name = name
         self.price = price
         self.quantity = quantity
+        self.category = category
 
 
 class Store:
@@ -43,8 +44,17 @@ class Inventory:
             next(inventory_log)
             for line in inventory_log:
                 line_list = line.split()
-                stock[line_list[0]] = Item(line_list[0], line_list[1], line_list[2])
+                stock[line_list[0]] = Item(line_list[1], line_list[2], line_list[3], line_list[4])
         return stock
+
+    def update_item_prices(self, code, discount):
+        if code in Inventory.__stock.getkeys():
+            discount_amount = Inventory.__stock[code].price * (discount / 100)
+            Inventory.__stock[code].price -= discount_amount
+        else:
+            for items in Inventory.__stock:
+                if items.category == 'code':
+                    items.price -= items.price * (discount / 100)
 
     def get_stock(self):
         return Inventory.__stock

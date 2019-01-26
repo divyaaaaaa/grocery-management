@@ -8,7 +8,8 @@ def start():
         print("""
         1.New Checkout
         2.View Today's sale
-        3.Exit/Quit
+        3.Update Discount by category
+        4.Exit/Quit
         """)
         choice = input("Greetings! Select from the menu:")
         if choice == "1":
@@ -65,7 +66,7 @@ def start():
                             register_obj.update_discount(discount_percentage)
                     bill = register_obj.get_bill()
                     views.view_bill(bill)
-                    bill_amount=register_obj.get_bill_amount()
+                    bill_amount = register_obj.get_bill_amount()
                     """
                         Using polymorphism to make payment using multiple methods, two sample methods used as example
                     """
@@ -90,6 +91,9 @@ def start():
         elif choice == "2":
             views.view_total_sales(Store.get_total())
         elif choice == "3":
+            category = input("Enter item code or category(to update all items of that category) to apply discount")
+            Inventory.update_item_prices(category)
+        elif choice == "4":
             switch = False
             print("\n Goodbye")
         elif choice != "":
