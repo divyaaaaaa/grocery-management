@@ -70,6 +70,11 @@ class Inventory:
             price_list.append(Inventory.stock[item].price)
         return price_list
 
+    def get_item_code(self, item_name):
+        for tmp_item in Inventory.__stock:
+            if Inventory.__stock[tmp_item].name == 'item_name':
+                return tmp_item
+
 
 class Register:
     def __init__(self):

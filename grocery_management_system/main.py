@@ -36,6 +36,10 @@ def start():
                             interrupt = True
                             break;
                         elif code == 'c' or code == 'C':
+                            """
+                                Option for billing person to pause entering code and check item code by its name
+                                in case code needs to be referred. 
+                            """
                             item_name = input("Enter name to fetch item code:")
                             item_code = Inventory.get_item_code(item_name)
                             print('Item code:', item_code)
@@ -43,7 +47,6 @@ def start():
                             purchased.append(code)
                     prices = Inventory.get_price_list(purchased)
                     register_obj.checkout(purchased, prices)
-                    Inventory.update_stock(purchased)
 
                 elif checkout_choice == '2':
                     stock = Inventory.get_stock()
@@ -64,6 +67,9 @@ def start():
                         if Customer(mobile_num).checkprevilige():
                             discount_percentage = 20
                             register_obj.update_discount(discount_percentage)
+                    """
+                        Fetching bill statement and final bill amount 
+                    """
                     bill = register_obj.get_bill()
                     views.view_bill(bill)
                     bill_amount = register_obj.get_bill_amount()
@@ -82,7 +88,10 @@ def start():
 
                     for option in payment_obj:
                         option.receive_payment(bill_amount)
-
+                    """
+                        Updating total sales and stock quantity once payment succeeds 
+                    """
+                    Inventory.update_stock(purchased)
                     Store.update_total(bill_amount)
                     in_checkout = False
                 elif checkout_choice == '4':
