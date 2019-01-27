@@ -1,6 +1,10 @@
 import views
 from models import Inventory, Register, Customer, Card, Cash, Store
 
+"""
+Main.py acts as controller that interacts with user and displays views by manipulating the model functions. 
+"""
+
 
 def start():
     switch = True
@@ -53,6 +57,9 @@ def start():
                     views.view_stock_availability(stock)
 
                 elif checkout_choice == '3':
+                    """
+                        To avail customer based discount
+                    """
                     print("""
                             1.Enter s to check if customer is senior citizen 
                             2.Enter P to check for other privileges
@@ -100,6 +107,9 @@ def start():
         elif choice == "2":
             views.view_total_sales(Store.get_total())
         elif choice == "3":
+            """
+                Apply discount to items by category or code (Inventory level discount)
+            """
             category = input("Enter item code or category(to update all items of that category) to apply discount")
             Inventory.update_item_prices(category)
         elif choice == "4":
